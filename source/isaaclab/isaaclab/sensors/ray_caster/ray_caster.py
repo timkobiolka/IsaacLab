@@ -275,11 +275,11 @@ class RayCaster(SensorBase):
                 indices = torch.arange(mesh_view.count, device=self._device)
                 # get the current world transforms for the mesh prim (for dynamic updates)
                 mesh_pos, mesh_quat = mesh_view.get_world_poses(indices)
+                mesh_scale = mesh_view.get_world_scales(indices)
                 base_points = torch.tensor(mesh_info["base_points"], device=self._device)
+                scaled_points = base_points.unsqueeze(0).repeat(mesh_view.count, 1, 1) * mesh_scale.unsqueeze(1)
                 # vectorize the transformation by applying the current rotation and translation to all base points using broadcasting
-                new_points = quat_apply(
-                    mesh_quat, base_points.unsqueeze(0).repeat(mesh_view.count, 1, 1)
-                ) + mesh_pos.unsqueeze(1)
+                new_points = quat_apply(mesh_quat, scaled_points) + mesh_pos.unsqueeze(1)
                 # if there is only one mesh instance, update the points and refit the mesh
                 # then, assign the mesh to all environments
                 if mesh_view.count == 1:
