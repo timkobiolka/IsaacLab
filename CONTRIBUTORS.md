@@ -87,6 +87,7 @@ Guidelines for modifications:
 * Ryley McCarroll
 * Shafeef Omar
 * Stephan Pleines
+* Tim Kobiolka
 * Vladimir Fokow
 * Wei Yang
 * Xavier Nal
@@ -94,6 +95,7 @@ Guidelines for modifications:
 * Yujian Zhang
 * Zhengyu Zhang
 * Ziqi Fan
+* Yuhao Qin
 
 ## Acknowledgements
 
